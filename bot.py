@@ -1,19 +1,15 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 
-chatBot = ChatBot("chatPot")
+from cleaner import remove_chat_metadata
 
+chatBot = ChatBot("chatPot")
 trainer = ListTrainer(chatBot)
 
-# training data, statement and its accepted response
-trainer.train([
-    "Hi",
-    "Welcome, friend 👀",
-])
-trainer.train([
-    "Are you a plant?",
-    "No, I'm the pot below the plant!",
-])
+file = "chat.txt"
+
+chatData = remove_chat_metadata(file)
+trainer.train(chatData)
 
 exit_condition = ['exit', ":q", "exit"]
 
